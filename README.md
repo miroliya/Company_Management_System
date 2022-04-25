@@ -8,6 +8,7 @@ For both environment
 $ composer install
 $ cp .env.example .env 
 $ php artisan migrate
+$ php artisan migrate db:seed
 ```
 
 ```shell script
