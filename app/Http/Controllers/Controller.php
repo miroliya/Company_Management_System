@@ -11,25 +11,21 @@ use Illuminate\Support\Facades\Auth;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+	use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    function checkpermission($permission)
-    {
-		try{
-			$user=Auth::user();
+	function checkpermission($permission)
+	{
+		try {
+			$user = Auth::user();
 			$userpermission = explode(',', $user->user_permission);
 			//dd($userpermission);
-			if(in_array($permission, $userpermission))
-			{
+			if (in_array($permission, $userpermission)) {
 				//dd('hi');
-			}
-			else
-			{
-			 return \Redirect::to('/admin-dashboard')->send()->with('error_message', 'You Have No Permission For Access This Module');
+			} else {
+				return \Redirect::to('/admin-dashboard')->send()->with('error_message', 'You Have No Permission For Access This Module');
 			}
 		} catch (Exception $e) {
 			dd($e->getMessage());
 		}
-    }
-
+	}
 }

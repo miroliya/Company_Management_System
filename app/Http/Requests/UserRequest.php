@@ -33,7 +33,7 @@ class UserRequest extends FormRequest
                 {
                     $rules['name'] = 'required';
                     $rules['email'] = 'required';
-                    $rules['password'] = 'required';
+                    //$rules['password'] = 'required';
                     break;
                 }
                 default:

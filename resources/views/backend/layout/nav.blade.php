@@ -13,18 +13,18 @@
           </li>
 
           <li class="nav-item  ">
-            <a href="{{route('admin.user.list')}}" class="nav-link {{ Request::is('admin-dashboard/user-list') ? 'active' : '' }} ">
+            <a href="{{route('admin.user.list')}}" class="nav-link {{ Request::is('admin-dashboard/admin-list') ? 'active' : '' }} ">
               <i class="far fa-circle nav-icon"></i>
               <p>Admin</p>
             </a>
           </li>
-          {{-- <li class="nav-item ">
-            <a href="{{route('admin.customer.list')}}" class="nav-link {{ Request::is('admin-dashboard/customer-list') ? 'active' : '' }}  ">
+          <li class="nav-item ">
+            <a href="{{route('admin.employee.list')}}" class="nav-link {{ Request::is('admin-dashboard/employee-list') ? 'active' : '' }}  ">
               <i class="far fa-circle nav-icon"></i>
               <p>Employee</p>
             </a>
           </li>
-          <li class="nav-item ">
+          {{-- <li class="nav-item ">
             <a href="{{route('admin.category.list')}}" class="nav-link {{ Request::is('admin-dashboard/category-list') ? 'active' : '' }}  ">
               <i class="far fa-circle nav-icon"></i>
               <p>HR</p>
