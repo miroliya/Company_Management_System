@@ -1,6 +1,6 @@
 @extends('backend.layout.layout')
 @section('title')
-    Employees
+    Task
 @endsection
 @section('css')
 @endsection
@@ -13,12 +13,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Employees</h1>
+                        <h1 class="m-0">Task</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Employee list</li>
+                            <li class="breadcrumb-item active">Task List</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -38,11 +38,11 @@
 
                             <div class="card-header">
 
-                                <h3 class="card-title">Employees list</h3>
+                                <h3 class="card-title">Task List</h3>
 
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input type="text" id="title" name="title"
+                                        <input type="text" id="task_search" name="title"
                                             class="form-control float-right" placeholder="Search">
 
                                         <div class="input-group-append">
@@ -52,8 +52,8 @@
                                         </div>
                                     </div>
                                     <br>
-                                    <a href="javascript:void(0)" id="create-new-user" class="btn btn-md bg-gradient-primary"
-                                        style="float:right">Add Employee</a>
+                                    <a href="javascript:void(0)" id="create-new-task" class="btn btn-md bg-gradient-primary"
+                                        style="float:right">Add Task</a>
                                 </div>
 
                             </div>
@@ -65,32 +65,30 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Name</th>
-                                            <th>Image</th>
-                                            <th>Phone</th>
-                                            <th>Gender</th>
-                                            <th>Age</th>
+                                            <th>Title</th>
+                                            <th>Start-Date</th>
+                                            <th>End-Date</th>
+                                            <th>Description</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="data_crud">
-                                        @foreach ($employee as $singleData)
+                                        @foreach ($task as $singleData)
                                             <tr id="table_id_{{ $singleData->id }}">
                                                 <td>{{ $singleData->id }}</td>
-                                                <td>{{ $singleData->name }}</td>
-                                                <td> <img style="width: 50px;" src="{{ url('./image/' . $singleData->image )}} "/></td>
-                                                <td>{{ $singleData->phone }}</td>
-                                                <td>{{ $singleData->gender == 0 ? "Male" : "Female" }}</td>
-                                                <td>{{ round($singleData->age) }}</td>
+                                                <td>{{ $singleData->title }}</td>
+                                                <td>{{ $singleData->start_date }}</td>
+                                                <td>{{ $singleData->end_date }}</td>
+                                                <td>{{ $singleData->description }}</td>
                                                 <td>{{ $singleData->user_status == 0 ? "Inactive" : "Active"}}</td>
                                                 <td>
                                                     <div class="btn-group">
-                                                        <a href="javascript:void(0)" id="edit-user"
+                                                        <a href="javascript:void(0)" id="edit-task"
                                                             data-id="{{ $singleData->id }}" class="btn btn-primary">
                                                             Edit
                                                         </a>
-                                                        <a href="javascript:void(0)" id="delete-user"
+                                                        <a href="javascript:void(0)" id="delete-task"
                                                             data-id="{{ $singleData->id }}" class="btn btn-danger">
                                                             Delete
                                                         </a>
@@ -125,78 +123,28 @@
                         <div class="modal-body">
                             <input type="hidden" name="data_id" id="data_id">
                             <div class="form-group col-md-12">
-                                <label>User Name: </label>
-                                <input type="text" placeholder="Enter Employee User Name" class="form-control"
-                                    id="user_name" name="name" required>
-                            </div>
-
-                            <div class="d-flex justify-content-between">
-                                <div class="form-group col-md-6">
-                                    <label>First Name: </label>
-                                    <input type="text" placeholder="Enter Employee First Name" class="form-control"
-                                        id="first_name" name="first_name" required>
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label>Last Name: </label>
-                                    <input type="text" placeholder="Enter Employee Last Name" class="form-control"
-                                        id="last_name" name="last_name" required>
-                                </div>
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label>Employee Image: </label>
-                                <input type="file" placeholder="Enter Employee Image" class="form-control"
-                                    id="image" name="image">
-                            </div>
-                            <div class="d-flex justify-content-between">
-                            <div class="form-group col-md-6">
-                                <label>Employee Email: </label>
-                                <input type="text" placeholder="Enter Employee Email" class="form-control"
-                                    id="employee_email" name="email" required>
-                            </div>
-
-                            <div class="form-group col-md-6">
-                                <label>Employee Password: </label>
-                                <input type="password" placeholder="Enter Employee Password" class="form-control"
-                                    id="password" name="password">
-                            </div>
-                            </div>
-
-                            <div class="d-flex justify-content-between">
-                            <div class="form-group col-md-6">
-                                <label>Employee Phone: </label>
-                                <input type="text" placeholder="Enter Customer Phone" class="form-control"
-                                    id="employee_phone" name="phone" required>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>Employee Address: </label>
-                                <input type="text" placeholder="Enter Employee Address" class="form-control"
-                                    id="employee_address" name="address" required>
-                            </div>
-                            </div>
-
-                            <div class="d-flex justify-content-between">
-                            <div class="form-group col-md-6">
-                                <label>Employee Age: </label>
-                                <input type="number" placeholder="Enter Employee Age" class="form-control"
-                                    id="employee_age" name="age" required>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label>Gender: </label>
-                                <select class="form-control" id="employee_gender" name="gender" required>
-                                    <option value="0">Male</option>
-                                    <option value="1">Female</option>
-                                </select>
-                            </div>
+                                <label>Title: </label>
+                                <input type="text" placeholder="Enter Task Title" class="form-control"
+                                    id="task_title" name="title" required>
                             </div>
                         
                             <div class="form-group col-md-12">
-                                <label>Employee DOB: </label>
-                                <input type="date" placeholder="Enter Employee DOB" class="form-control" id="employee_dob"
-                                    name="dob" required>
+                                <label>Task Start Date: </label>
+                                <input type="date" placeholder="Enter Task Start Date" class="form-control" id="task_start_date"
+                                    name="start_date" required>
                             </div>
                             <div class="form-group col-md-12">
-                                <label>Employee Status: </label>
-                                <select class="form-control" id="employee_status" name="user_status" required>
+                                <label>Task End Date: </label>
+                                <input type="date" placeholder="Enter Task End Date" class="form-control" id="task_end_date"
+                                    name="end_date" required>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Task Description: </label>
+                                <textarea class="form-control" name="description" placeholder="Enter Task Description" cols="30" rows="5" id="description" required></textarea>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Task Status: </label>
+                                <select class="form-control" id="task_status" name="status" required>
                                     <option value="0">Inactive</option>
                                     <option value="1">Active</option>
                                 </select>
@@ -237,37 +185,31 @@
 
 
                 /*  When user click add user button */
-                $('#create-new-user').click(function() {
-                    $('#btn-save').val("create-user");
+                $('#create-new-task').click(function() {
+                    $('#btn-save').val("create-task");
                     $('#data_id').val("");
                     $('#dataForm').trigger("reset");
-                    $('#exampleModalScrollableTitle').html("Add New Employee");
+                    $('#exampleModalScrollableTitle').html("Add New Task");
                     $('#btn-save').html("Save");
                     $('#exampleModalScrollable').modal('show');
                     $('#password').attr('required', true);
-                    $('#employee_status').val(1);
+                    $('#task_status').val(1);
                 });
 
                 /* When click edit user */
-                $('body').on('click', '#edit-user', function() {
+                $('body').on('click', '#edit-task', function() {
                     var data_id = $(this).data('id');
-                    $.get('/admin-dashboard/employee-edit/' + data_id, function(data) {
-                        $('#exampleModalScrollableTitle').html("Edit Employee Information");
+                    $.get('/admin-dashboard/task-edit/' + data_id, function(data) {
+                        $('#exampleModalScrollableTitle').html("Edit Task Information");
                         $('#btn-save').html("Update");
-                        $('#btn-save').val("edit-user");
+                        $('#btn-save').val("edit-task");
                         $('#exampleModalScrollable').modal('show');
                         $('#data_id').val(data.id);
-                        $('#user_name').val(data.name);
-                        $('#first_name').val(data.first_name);
-                        $('#last_name').val(data.last_name);
-                        $('#employee_email').val(data.email);
-                        $('#employee_phone').val(data.phone);
-                        $('#employee_age').val(data.age);
-                        $('#employee_address').val(data.address);
-                        $('#employee_gender').val(data.gender);
-                        $('#employee_dob').val(data.dob);
-                        $('#employee_status').val(data.user_status);
-                        $('#image').val(data.image);
+                        $('#task_title').val(data.title);
+                        $('#task_start_date').val(data.start_date);
+                        $('#task_end_date').val(data.end_date);
+                        $('#description').val(data.description);
+                        $('#task_status').val(data.status);
                     })
                 });
 
@@ -275,7 +217,7 @@
 
 
                 //delete user login
-                $('body').on('click', '#delete-user', function() {
+                $('body').on('click', '#delete-task', function() {
                     var data_id = $(this).data("id");
 
                     Swal.fire({
@@ -294,7 +236,7 @@
 
                             $.ajax({
                                 type: "DELETE",
-                                url: "{{ url('/admin-dashboard/employee-delete') }}" + '/' +
+                                url: "{{ url('/admin-dashboard/task-delete') }}" + '/' +
                                     data_id,
                                 success: function(data) {
                                     $("#table_id_" + data_id).remove();
@@ -340,10 +282,10 @@
                 var id = $('#table_id_').val();
                 if (id) {
                     var method = 'update';
-                    var url = "{{ route('admin.employee.store') }}";
+                    var url = "{{ route('admin.task.store') }}";
                 } else {
                     var method = 'add';
-                    var url = "{{ route('admin.employee.store') }}";
+                    var url = "{{ route('admin.task.store') }}";
                 }
                 $.ajaxSetup({
                     headers: {
@@ -368,30 +310,28 @@
                         var datavalue = '<tr id="table_id_' +
                             data.id + '"><td >' +
                             data.id + '</td><td>' +
-                            data.name + '</td><td>' + 
-                            `<img style="width: 50px;" src="{{ url('/image/` + spare + `' )}} "/>` 
-                            + '</td><td>' +
-                            data.phone + '</td><td>' +
-                            `${data.gender == 0 ? 'Male' : 'Female' }` + '</td><td>' +
-                            data.age + '</td><td>' +
-                            `${data.user_status == 0 ? 'Inactive' : 'Active' }` + '</td>';
+                            data.title + '</td><td>' + 
+                            data.start_date + '</td><td>' +
+                            data.end_date + '</td><td>' +
+                            data.description + '</td><td>' +
+                            `${data.status == 0 ? 'Inactive' : 'Active' }` + '</td>';
 
 
                         datavalue += '<td><div class="btn-group" role="group" aria-label="Basic example">';
 
-                        datavalue += ' <a href="javascript:void(0)" id="edit-user" data-id="' +
+                        datavalue += ' <a href="javascript:void(0)" id="edit-task" data-id="' +
                             data.id +
                             '" class="btn btn-primary waves-effect waves-float waves-light">Edit</a>';
 
 
-                        datavalue += '<a href="javascript:void(0)" id="delete-user" data-id="' +
+                        datavalue += '<a href="javascript:void(0)" id="delete-task" data-id="' +
                             data.id +
                             '" class="btn btn-danger waves-effect waves-float waves-light" >Delete</a>';
 
                         datavalue += '</div></td></tr>';
 
 
-                        if (actionType == "create-user") {
+                        if (actionType == "create-task") {
                             $('#data_crud').prepend(datavalue);
                         } else {
                             $("#table_id_" + data.id).replaceWith(datavalue);
@@ -430,11 +370,11 @@
                 });
             });
 
-            $('#title').keyup(function() {
+            $('#task_search').keyup(function() {
                 var query = $(this).val();
                 var _token = $('input[name="_token"]').val();
                 $.ajax({
-                    url: "{{ route('admin.employee.search') }}",
+                    url: "{{ route('admin.task.search') }}",
                     method: "POST",
                     data: {
                         query: query,

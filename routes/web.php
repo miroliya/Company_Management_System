@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\backend\DepartmentsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\Usercontroller;
 use App\Http\Controllers\backend\EmployeeController;
-
+use App\Http\Controllers\backend\EventController;
+use App\Http\Controllers\backend\TaskController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -43,7 +45,7 @@ Route::group(['middleware' => 'auth:web'], function () {
   Route::post('/admin-dashboard/user-savepermissin', [UserController::class, 'user_savepermissin'])->name('admin.user.savepermissin');
 
 
-  //EMPLOYEE ROUTE
+  //Employee Route
   Route::get('/admin-dashboard/employee-list', [EmployeeController::class, 'index'])->name('admin.employee.list');
   Route::get('/admin-dashboard/employee-create', [EmployeeController::class, 'create'])->name('admin.employee.create');
   Route::post('/admin-dashboard/employee-store', [EmployeeController::class, 'store'])->name('admin.employee.store');
@@ -52,9 +54,36 @@ Route::group(['middleware' => 'auth:web'], function () {
   Route::post('/admin-dashboard/employee-update/{id}', [EmployeeController::class, 'update'])->name('admin.employee.update');
   Route::delete('/admin-dashboard/employee-delete/{id}', [EmployeeController::class, 'destroy'])->name('admin.employee.delete');
   Route::post('/admin-dashboard/employee-search', [EmployeeController::class, 'employee_search'])->name('admin.employee.search');
-  // Route::get('/admin-dashboard/employee-addpermission/{id}', [EmployeeController::class, 'user_addpermission'])->name('admin.employee.addpermission');
-  // Route::post('/admin-dashboard/employee-savepermissin', [EmployeeController::class, 'user_savepermissin'])->name('admin.employee.savepermissin');	   
-  //CUSTOMER ROUTE
+
+  //Task Route
+  Route::get('/admin-dashboard/task-list', [TaskController::class, 'index'])->name('admin.task.list');
+  Route::get('/admin-dashboard/task-create', [TaskController::class, 'create'])->name('admin.task.create');
+  Route::post('/admin-dashboard/task-store', [TaskController::class, 'store'])->name('admin.task.store');
+  Route::get('/admin-dashboard/task-edit/{id}', [TaskController::class, 'edit'])->name('admin.task.edit');
+  Route::get('/admin-dashboard/task-show/{id}', [TaskController::class, 'show'])->name('admin.task.show');
+  Route::post('/admin-dashboard/task-update/{id}', [TaskController::class, 'update'])->name('admin.task.update');
+  Route::delete('/admin-dashboard/task-delete/{id}', [TaskController::class, 'destroy'])->name('admin.task.delete');
+  Route::post('/admin-dashboard/task-search', [TaskController::class, 'task_search'])->name('admin.task.search');
+
+    //Event Route
+    Route::get('/admin-dashboard/event-list', [EventController::class, 'index'])->name('admin.event.list');
+    Route::get('/admin-dashboard/event-create', [EventController::class, 'create'])->name('admin.event.create');
+    Route::post('/admin-dashboard/event-store', [EventController::class, 'store'])->name('admin.event.store');
+    Route::get('/admin-dashboard/event-edit/{id}', [EventController::class, 'edit'])->name('admin.event.edit');
+    Route::get('/admin-dashboard/event-show/{id}', [EventController::class, 'show'])->name('admin.event.show');
+    Route::post('/admin-dashboard/event-update/{id}', [EventController::class, 'update'])->name('admin.event.update');
+    Route::delete('/admin-dashboard/event-delete/{id}', [EventController::class, 'destroy'])->name('admin.event.delete');
+    Route::post('/admin-dashboard/event-search', [EventController::class, 'event_search'])->name('admin.event.search');
+
+    //Department Route
+    Route::get('/admin-dashboard/department-list', [DepartmentsController::class, 'index'])->name('admin.department.list');
+    Route::get('/admin-dashboard/department-create', [DepartmentsController::class, 'create'])->name('admin.department.create');
+    Route::post('/admin-dashboard/department-store', [DepartmentsController::class, 'store'])->name('admin.department.store');
+    Route::get('/admin-dashboard/department-edit/{id}', [DepartmentsController::class, 'edit'])->name('admin.department.edit');
+    Route::get('/admin-dashboard/department-show/{id}', [DepartmentsController::class, 'show'])->name('admin.department.show');
+    Route::post('/admin-dashboard/department-update/{id}', [DepartmentsController::class, 'update'])->name('admin.department.update');
+    Route::delete('/admin-dashboard/department-delete/{id}', [DepartmentsController::class, 'destroy'])->name('admin.department.delete');
+    Route::post('/admin-dashboard/department-search', [DepartmentsController::class, 'department_search'])->name('admin.department.search');
 
 });
 //ADMIN PROTECTED ROUTE END

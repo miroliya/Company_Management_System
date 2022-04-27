@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Requests;
-
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class TaskRequest extends FormRequest
 {
     public static $rules = [];
     /**
@@ -26,11 +25,15 @@ class UserRequest extends FormRequest
     public function rules()
     {
         $rules = Self::$rules;
+
         switch (Route::currentRouteName()) {
-            case 'admin.user.store':
+            case 'admin.task.store':
                 {
-                    $rules['name'] = 'required';
-                    $rules['email'] = 'required';
+                    $rules['title'] = 'required';
+                    $rules['start_date'] = 'required';
+                    $rules['end_date'] = 'required';
+                    $rules['description'] = 'required'; 
+                    $rules['status'] = 'required'; 
                     break;
                 }
                 default:

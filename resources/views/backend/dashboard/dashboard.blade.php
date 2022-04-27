@@ -28,7 +28,7 @@
     <!-- /.content-header -->
     
     <!-- Main content -->
-    <section class="content">
+    {{-- <section class="content">
         <div class="container-fluid">
           @include('backend.layout.alert')
           <!-- Small boxes (Stat box) -->
@@ -611,7 +611,7 @@
         </div><!-- /.container-fluid -->
       </section>
       <!-- /.content -->    
-@endsection
+@endsection --}}
 
 @section('js')
     

@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Route;
 
-class UserRequest extends FormRequest
+class EventRequest extends FormRequest
 {
     public static $rules = [];
     /**
@@ -26,11 +26,14 @@ class UserRequest extends FormRequest
     public function rules()
     {
         $rules = Self::$rules;
+
         switch (Route::currentRouteName()) {
-            case 'admin.user.store':
+            case 'admin.event.store':
                 {
-                    $rules['name'] = 'required';
-                    $rules['email'] = 'required';
+                    $rules['date'] = 'required';
+                    $rules['event'] = 'required';
+                    $rules['description'] = 'required'; 
+                    $rules['status'] = 'required'; 
                     break;
                 }
                 default:

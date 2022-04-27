@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EmployeeRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Exception;
@@ -32,7 +33,7 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(EmployeeRequest $request)
     {
         try{
             if ($request->data_id == null) {
@@ -72,7 +73,7 @@ class EmployeeController extends Controller
                 $data->gender = $request->gender;
                 $data->address = $request->address;
                 $data->age = $request->age;
-                $data->dob = $request->dob;;
+                $data->dob = $request->dob;
                 if ($request->password != null) {
                     $data->password = bcrypt($request->password);
                 }

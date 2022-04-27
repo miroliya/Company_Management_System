@@ -24,11 +24,30 @@
               <p>Employee</p>
             </a>
           </li>
+          <li class="nav-item ">
+            <a href="{{route('admin.task.list')}}" class="nav-link {{ Request::is('admin-dashboard/task-list') ? 'active' : '' }}  ">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Task</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a href="{{route('admin.event.list')}}" class="nav-link {{ Request::is('admin-dashboard/event-list') ? 'active' : '' }}  ">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Events</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a href="{{route('admin.department.list')}}" class="nav-link {{ Request::is('admin-dashboard/department-list') ? 'active' : '' }}  ">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Departments</p>
+            </a>
+          </li>
+
           {{-- <li class="nav-item ">
             <a href="{{route('admin.category.list')}}" class="nav-link {{ Request::is('admin-dashboard/category-list') ? 'active' : '' }}  ">
               <i class="far fa-circle nav-icon"></i>
               <p>HR</p>
-            </a>
+            </a> 
           </li> --}}
               {{-- <li class="nav-item ">
                 <a href="#" class="nav-link ">
