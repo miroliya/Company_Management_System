@@ -5,11 +5,11 @@
         <td>{{ $singleData->status == 0 ? "Inactive" : "Active"}}</td>
     <td>
         <div class="btn-group">
-            <a href="javascript:void(0)" id="edit-user"
+            <a href="javascript:void(0)" id="edit-department"
                 data-id="{{ $singleData->id }}" class="btn btn-primary">
                 Edit
             </a>
-            <a href="javascript:void(0)" id="delete-user"
+            <a href="javascript:void(0)" id="delete-department"
                 data-id="{{ $singleData->id }}" class="btn btn-danger">
                 Delete
             </a>

@@ -42,7 +42,18 @@
               <p>Departments</p>
             </a>
           </li>
-
+          <li class="nav-item ">
+            <a href="{{route('admin.leave.list')}}" class="nav-link {{ Request::is('admin-dashboard/leave-list') ? 'active' : '' }}  ">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Leaves</p>
+            </a>
+          </li>
+          <li class="nav-item ">
+            <a href="{{route('admin.salary.list')}}" class="nav-link {{ Request::is('admin-dashboard/salary-list') ? 'active' : '' }}  ">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Salary</p>
+            </a>
+          </li>
           {{-- <li class="nav-item ">
             <a href="{{route('admin.category.list')}}" class="nav-link {{ Request::is('admin-dashboard/category-list') ? 'active' : '' }}  ">
               <i class="far fa-circle nav-icon"></i>

@@ -5,7 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\Usercontroller;
 use App\Http\Controllers\backend\EmployeeController;
 use App\Http\Controllers\backend\EventController;
+use App\Http\Controllers\backend\LeavesContrller;
 use App\Http\Controllers\backend\TaskController;
+use App\Http\Controllers\backend\ManageSalaryController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -85,6 +87,26 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::delete('/admin-dashboard/department-delete/{id}', [DepartmentsController::class, 'destroy'])->name('admin.department.delete');
     Route::post('/admin-dashboard/department-search', [DepartmentsController::class, 'department_search'])->name('admin.department.search');
 
+    //Leaves Route
+    Route::get('/admin-dashboard/leave-list', [LeavesContrller::class, 'index'])->name('admin.leave.list');
+    Route::get('/admin-dashboard/leave-create', [LeavesContrller::class, 'create'])->name('admin.leave.create');
+    Route::post('/admin-dashboard/leave-store', [LeavesContrller::class, 'store'])->name('admin.leave.store');
+    Route::get('/admin-dashboard/leave-edit/{id}', [LeavesContrller::class, 'edit'])->name('admin.leave.edit');
+    Route::get('/admin-dashboard/leave-show/{id}', [LeavesContrller::class, 'show'])->name('admin.leave.show');
+    Route::post('/admin-dashboard/leave-update/{id}', [LeavesContrller::class, 'update'])->name('admin.leave.update');
+    Route::delete('/admin-dashboard/leave-delete/{id}', [LeavesContrller::class, 'destroy'])->name('admin.leave.delete');
+    Route::post('/admin-dashboard/leave-search', [LeavesContrller::class, 'leave_search'])->name('admin.leave.search');
+
+    //Salary Route
+    Route::get('/admin-dashboard/salary-list', [ManageSalaryController::class, 'index'])->name('admin.salary.list');
+    Route::get('/admin-dashboard/salary-create', [ManageSalaryController::class, 'create'])->name('admin.salary.create');
+    Route::post('/admin-dashboard/salary-store', [ManageSalaryController::class, 'store'])->name('admin.salary.store');
+    Route::get('/admin-dashboard/salary-edit/{id}', [ManageSalaryController::class, 'edit'])->name('admin.salary.edit');
+    Route::get('/admin-dashboard/salary-show/{id}', [ManageSalaryController::class, 'show'])->name('admin.salary.show');
+    Route::post('/admin-dashboard/salary-update/{id}', [ManageSalaryController::class, 'update'])->name('admin.salary.update');
+    Route::delete('/admin-dashboard/salary-delete/{id}', [ManageSalaryController::class, 'destroy'])->name('admin.salary.delete');
+    Route::post('/admin-dashboard/salary-search', [ManageSalaryController::class, 'salary_search'])->name('admin.salary.search');
+    
 });
 //ADMIN PROTECTED ROUTE END
 //Auth::routes();
