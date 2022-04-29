@@ -1,6 +1,6 @@
 @extends('backend.layout.layout')
 @section('title')
-    Leaves
+    Attendance
 @endsection
 @section('css')
 @endsection
@@ -13,12 +13,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Manage Salary</h1>
+                        <h1 class="m-0">Attendance</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Salaries List</li>
+                            <li class="breadcrumb-item active">Attendance List</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -38,11 +38,11 @@
 
                             <div class="card-header">
 
-                                <h3 class="card-title">Salaries List</h3>
+                                <h3 class="card-title">Attendance List</h3>
 
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input type="text" id="salary_search" name="title"
+                                        <input type="text" id="attendance_search" name="title"
                                             class="form-control float-right" placeholder="Search">
 
                                         <div class="input-group-append">
@@ -52,8 +52,8 @@
                                         </div>
                                     </div>
                                     <br>
-                                    <a href="javascript:void(0)" id="create-new-salary" class="btn btn-md bg-gradient-primary"
-                                        style="float:right">Add Salary</a>
+                                    <a href="javascript:void(0)" id="create-new-attendance" class="btn btn-md bg-gradient-primary"
+                                        style="float:right">Add Attendance</a>
                                 </div>
 
                             </div>
@@ -65,26 +65,30 @@
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Working Day's</th>
-                                            <th>Tax</th>
-                                            <th>Gross Salary</th>
+                                            <th>Date</th>
+                                            <th>Username</th>
+                                            <th>Attendance</th>
+                                            <th>In Time</th>
+                                            <th>Out Time</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="data_crud">
-                                        @foreach ($salary as $singleData)
+                                        @foreach ($attendance as $singleData)
                                             <tr id="table_id_{{ $singleData->id }}">
                                                 <td>{{ $singleData->id }}</td>
-                                                <td>{{ $singleData->working_days }}</td>
-                                                <td>{{ $singleData->tax }}</td>
-                                                <td>{{ $singleData->gross_salary }}</td>
+                                                <td>{{ $singleData->date }}</td>
+                                                <td>{{ $singleData->username }}</td>
+                                                <td>{{ $singleData->attendance == 0 ? "Absent" : "Present"}}</td>
+                                                <td>{{ $singleData->in }}</td>
+                                                <td>{{ $singleData->out }}</td>
                                                 <td>
                                                     <div class="btn-group">
-                                                        <a href="javascript:void(0)" id="edit-salary"
+                                                        <a href="javascript:void(0)" id="edit-attendance"
                                                             data-id="{{ $singleData->id }}" class="btn btn-primary">
                                                             Edit
                                                         </a>
-                                                        <a href="javascript:void(0)" id="delete-salary"
+                                                        <a href="javascript:void(0)" id="delete-attendance"
                                                             data-id="{{ $singleData->id }}" class="btn btn-danger">
                                                             Delete
                                                         </a>
@@ -118,19 +122,21 @@
                         <div class="modal-body">
                             <input type="hidden" name="data_id" id="data_id">
                             <div class="form-group col-md-12">
-                                <label>Working Day's: </label>
-                                <input type="number" placeholder="Enter Working Day's" class="form-control" id="working_days"
-                                    name="working_days" required>
+                                <label>Date: </label>
+                                <input type="date" placeholder="Enter date" class="form-control" id="date"
+                                    name="date" required>
                             </div>
                             <div class="form-group col-md-12">
-                                <label>Tax:</label>
-                                <input type="number" placeholder="Enter Tax" class="form-control" id="tax"
-                                    name="tax" required>
+                                <label>Username:</label>
+                                <input type="text" placeholder="Enter Username" class="form-control" id="username"
+                                    name="username" required>
                             </div>
                             <div class="form-group col-md-12">
-                                <label>Gross Salary: </label>
-                                <input type="number" placeholder="Enter Gross Salary" class="form-control" id="gross_salary"
-                                    name="gross_salary" required>
+                                <label>Attendance: </label>
+                                <select class="form-control" id="attendance" name="attendance" required>
+                                    <option value="0">Absent</option>
+                                    <option value="1">Present</option>
+                                </select>
                             </div>
 
                         </div>
@@ -164,35 +170,33 @@
                     reader.readAsDataURL(this.files[0]);
                 });
 
-
-
                 /*  When user click add user button */
-                $('#create-new-salary').click(function() {
-                    $('#btn-save').val("create-salary");
+                $('#create-new-attendance').click(function() {
+                    $('#btn-save').val("create-attendance");
                     $('#data_id').val("");
                     $('#dataForm').trigger("reset");
-                    $('#exampleModalScrollableTitle').html("Add Salary");
+                    $('#exampleModalScrollableTitle').html("Add Attendance");
                     $('#btn-save').html("Save");
                     $('#exampleModalScrollable').modal('show');
                 });
 
                 /* When click edit user */
-                $('body').on('click', '#edit-salary', function() {
+                $('body').on('click', '#edit-attendance', function() {
                     var data_id = $(this).data('id');
-                    $.get('/admin-dashboard/salary-edit/' + data_id, function(data) {
-                        $('#exampleModalScrollableTitle').html("Edit Salary Information");
+                    $.get('/admin-dashboard/attendance-edit/' + data_id, function(data) {
+                        $('#exampleModalScrollableTitle').html("Edit Attendance Information");
                         $('#btn-save').html("Update");
-                        $('#btn-save').val("edit-salary");
+                        $('#btn-save').val("edit-attendance");
                         $('#exampleModalScrollable').modal('show');
                         $('#data_id').val(data.id);
-                        $('#working_days').val(data.working_days);
-                        $('#tax').val(data.tax);
-                        $('#gross_salary').val(data.gross_salary);
+                        $('#date').val(data.date);
+                        $('#username').val(data.username);
+                        $('#attendance').val(data.attendance);
                     })
                 });
 
                 //delete user login
-                $('body').on('click', '#delete-salary', function() {
+                $('body').on('click', '#delete-attendance', function() {
                     var data_id = $(this).data("id");
                     Swal.fire({
                         title: 'Are you sure?',
@@ -210,7 +214,7 @@
 
                             $.ajax({
                                 type: "DELETE",
-                                url: "{{ url('/admin-dashboard/salary-delete') }}" + '/' +
+                                url: "{{ url('/admin-dashboard/attendace-delete') }}" + '/' +
                                     data_id,
                                 success: function(data) {
                                     $("#table_id_" + data_id).remove();
@@ -256,10 +260,10 @@
                 var id = $('#table_id_').val();
                 if (id) {
                     var method = 'update';
-                    var url = "{{ route('admin.salary.store') }}";
+                    var url = "{{ route('admin.attendance.store') }}";
                 } else {
                     var method = 'add';
-                    var url = "{{ route('admin.salary.store') }}";
+                    var url = "{{ route('admin.attendance.store') }}";
                 }
                 $.ajaxSetup({
                     headers: {
@@ -284,25 +288,27 @@
                         var datavalue = '<tr id="table_id_' +
                             data.id + '"><td >' +
                             data.id + '</td><td>' +
-                            data.working_days + '</td><td>' + 
-                            data.tax + '</td><td>' +
-                            data.gross_salary + '</td>';
+                            data.date + '</td><td>' + 
+                            data.username + '</td><td>' +
+                            data.in + '</td><td>' +
+                            data.out + '</td><td>' +
+                            `${data.attendance == 0 ? 'Absent' : 'Present' }` + '</td>';
 
                         datavalue += '<td><div class="btn-group" role="group" aria-label="Basic example">';
 
-                        datavalue += ' <a href="javascript:void(0)" id="edit-salary" data-id="' +
+                        datavalue += ' <a href="javascript:void(0)" id="edit-attendance" data-id="' +
                             data.id +
                             '" class="btn btn-primary waves-effect waves-float waves-light">Edit</a>';
 
 
-                        datavalue += '<a href="javascript:void(0)" id="delete-salary" data-id="' +
+                        datavalue += '<a href="javascript:void(0)" id="delete-attendance" data-id="' +
                             data.id +
                             '" class="btn btn-danger waves-effect waves-float waves-light" >Delete</a>';
 
                         datavalue += '</div></td></tr>';
 
 
-                        if (actionType == "create-salary") {
+                        if (actionType == "create-attendance") {
                             $('#data_crud').prepend(datavalue);
                         } else {
                             $("#table_id_" + data.id).replaceWith(datavalue);
@@ -341,11 +347,11 @@
                 });
             });
 
-            $('#salary_search').keyup(function() {
+            $('#attendance_search').keyup(function() {
                 var query = $(this).val();
                 var _token = $('input[name="_token"]').val();
                 $.ajax({
-                    url: "{{ route('admin.salary.search') }}",
+                    url: "{{ route('admin.attendance.search') }}",
                     method: "POST",
                     data: {
                         query: query,

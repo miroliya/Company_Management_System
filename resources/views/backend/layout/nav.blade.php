@@ -54,6 +54,12 @@
               <p>Salary</p>
             </a>
           </li>
+          <li class="nav-item ">
+            <a href="{{route('admin.attendance.list')}}" class="nav-link {{ Request::is('admin-dashboard/attendance-list') ? 'active' : '' }}  ">
+              <i class="far fa-circle nav-icon"></i>
+              <p>Attendance</p>
+            </a>
+          </li>
           {{-- <li class="nav-item ">
             <a href="{{route('admin.category.list')}}" class="nav-link {{ Request::is('admin-dashboard/category-list') ? 'active' : '' }}  ">
               <i class="far fa-circle nav-icon"></i>

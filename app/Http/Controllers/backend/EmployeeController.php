@@ -57,7 +57,6 @@ class EmployeeController extends Controller
                 $data->user_status = $request->user_status;
                 $save = $data->save();
             } else {
-    
                 $data = User::find($request->data_id);
                 $data->name = $request->name;
                 $data->first_name = $request->first_name;

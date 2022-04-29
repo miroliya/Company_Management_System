@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\backend\AttendanceController;
 use App\Http\Controllers\backend\DepartmentsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\Usercontroller;
@@ -106,6 +107,16 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::post('/admin-dashboard/salary-update/{id}', [ManageSalaryController::class, 'update'])->name('admin.salary.update');
     Route::delete('/admin-dashboard/salary-delete/{id}', [ManageSalaryController::class, 'destroy'])->name('admin.salary.delete');
     Route::post('/admin-dashboard/salary-search', [ManageSalaryController::class, 'salary_search'])->name('admin.salary.search');
+
+     //Attendance Route
+     Route::get('/admin-dashboard/attendance-list', [AttendanceController::class, 'index'])->name('admin.attendance.list');
+     Route::get('/admin-dashboard/attendance-create', [AttendanceController::class, 'create'])->name('admin.attendance.create');
+     Route::post('/admin-dashboard/attendance-store', [AttendanceController::class, 'store'])->name('admin.attendance.store');
+     Route::get('/admin-dashboard/attendance-edit/{id}', [AttendanceController::class, 'edit'])->name('admin.attendance.edit');
+     Route::get('/admin-dashboard/attendance-show/{id}', [AttendanceController::class, 'show'])->name('admin.attendance.show');
+     Route::post('/admin-dashboard/attendance-update/{id}', [AttendanceController::class, 'update'])->name('admin.attendance.update');
+     Route::delete('/admin-dashboard/attendance-delete/{id}', [AttendanceController::class, 'destroy'])->name('admin.attendance.delete');
+     Route::post('/admin-dashboard/attendance-search', [AttendanceController::class, 'attendance_search'])->name('admin.attendance.search');
     
 });
 //ADMIN PROTECTED ROUTE END
