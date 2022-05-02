@@ -228,8 +228,14 @@ class Usercontroller extends Controller
                 'email' => 'required',
                 'password' => 'required',
             ]);
+            
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
                 Auth::user()->save();
+
+                if(Auth::user()->id == null){
+                    
+                }
+
                 return redirect()->route('admin.dashboard')->with('success_message', 'You are success fully loged In');
             } else {
                 return redirect()->route('admin.login')->with('error_message', 'Invalid Username or Password');
