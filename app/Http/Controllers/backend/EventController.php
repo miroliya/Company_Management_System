@@ -20,7 +20,6 @@ class EventController extends Controller
     public function index()
     {
         try{
-            $this->checkpermission(1);
             $event = Event::latest()->get();
             return view('backend.event.index', compact('event'));
         } catch (Exception $e) {

@@ -20,7 +20,6 @@ class DepartmentsController extends Controller
     public function index()
     {
         try{
-            $this->checkpermission(1);
             $department = Department::latest()->get();
             return view('backend.department.index', compact('department'));
         } catch (Exception $e) {

@@ -1,6 +1,6 @@
 @extends('backend.layout.layout')
 @section('title')
-    Attendance
+    Task
 @endsection
 @section('css')
 @endsection
@@ -13,12 +13,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Attendance</h1>
+                        <h1 class="m-0">User Meta</h1>
                     </div><!-- /.col -->
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Attendance List</li>
+                            <li class="breadcrumb-item active">User Meta List</li>
                         </ol>
                     </div><!-- /.col -->
                 </div><!-- /.row -->
@@ -38,11 +38,11 @@
 
                             <div class="card-header">
 
-                                <h3 class="card-title">Attendance List</h3>
+                                <h3 class="card-title">User Meta List</h3>
 
                                 <div class="card-tools">
                                     <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input type="text" id="attendance_search" name="title"
+                                        <input type="text" id="meta_search" name="title"
                                             class="form-control float-right" placeholder="Search">
 
                                         <div class="input-group-append">
@@ -52,43 +52,43 @@
                                         </div>
                                     </div>
                                     <br>
-                                    <a href="javascript:void(0)" id="create-new-attendance" class="btn btn-md bg-gradient-primary"
-                                        style="float:right">Add Attendance</a>
+                                    @if (Auth::user()->user_permission != ',2')
+                                    <a href="javascript:void(0)" id="create-new-meta" class="btn btn-md bg-gradient-primary"
+                                        style="float:right">Add Meta</a>
+                                    @endif
                                 </div>
 
                             </div>
                             <!-- /.card-header -->
-
+ 
                             <div class="card-body table-responsive p-0">
 
                                 <table class="table table-hover text-nowrap">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
-                                            <th>Date</th>
-                                            <th>Username</th>
-                                            <th>Attendance</th>
-                                            <th>In Time</th>
-                                            <th>Out Time</th>
+                                            <th>Join Date</th>
+                                            <th>Designation</th>
+                                            <th>Salary</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody id="data_crud">
-                                        @foreach ($attendance as $singleData)
+                                        @foreach ($meta as $singleData)
                                             <tr id="table_id_{{ $singleData->id }}">
                                                 <td>{{ $singleData->id }}</td>
-                                                <td>{{ $singleData->date }}</td>
-                                                <td>{{ $singleData->username }}</td>
-                                                <td>{{ $singleData->attendance == 0 ? "Absent" : "Present"}}</td>
-                                                <td>{{ $singleData->in }}</td>
-                                                <td>{{ $singleData->out }}</td>
+                                                <td>{{ $singleData->join_date }}</td>
+                                                <td>{{ $singleData->designation }}</td>
+                                                <td>{{ $singleData->salary }}</td>
+                                                <td>{{ $singleData->status == 0 ? "Inactive" : "Active"}}</td>
                                                 <td>
                                                     <div class="btn-group">
-                                                        <a href="javascript:void(0)" id="edit-attendance"
+                                                        <a href="javascript:void(0)" id="edit-meta"
                                                             data-id="{{ $singleData->id }}" class="btn btn-primary">
                                                             Edit
                                                         </a>
-                                                        <a href="javascript:void(0)" id="delete-attendance"
+                                                        <a href="javascript:void(0)" id="delete-meta"
                                                             data-id="{{ $singleData->id }}" class="btn btn-danger">
                                                             Delete
                                                         </a>
@@ -96,6 +96,7 @@
                                                 </td>
                                             </tr>
                                         @endforeach
+
                                     </tbody>
                                 </table>
                             </div>
@@ -122,22 +123,28 @@
                         <div class="modal-body">
                             <input type="hidden" name="data_id" id="data_id">
                             <div class="form-group col-md-12">
-                                <label>Date: </label>
-                                <input type="date" placeholder="Enter date" class="form-control" id="date"
-                                    name="date" required>
+                                <label>Join Date:</label>
+                                <input type="date" placeholder="Enter Join Date" class="form-control" id="join_date"
+                                    name="join_date" required>
                             </div>
                             <div class="form-group col-md-12">
-                                <label>Username:</label>
-                                <input type="text" placeholder="Enter Username" class="form-control" id="username"
-                                    name="username" required>
+                                <label>Designation: </label>
+                                <input type="text" placeholder="Enter Designation" class="form-control" id="designation"
+                                    name="designation" required>
                             </div>
                             <div class="form-group col-md-12">
-                                <label>Attendance: </label>
-                                <select class="form-control" id="attendance" name="attendance" required>
-                                    <option value="0">Absent</option>
-                                    <option value="1">Present</option>
+                                <label>Salary: </label>
+                                <input type="number" placeholder="Enter salary" class="form-control" id="salary"
+                                    name="salary" required>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label>Meta Status: </label>
+                                <select class="form-control" id="status" name="status" required>
+                                    <option value="0">Inactive</option>
+                                    <option value="1">Active</option>
                                 </select>
                             </div>
+
 
                         </div>
                         <div class="modal-footer justify-content-between">
@@ -170,34 +177,41 @@
                     reader.readAsDataURL(this.files[0]);
                 });
 
+
+
                 /*  When user click add user button */
-                $('#create-new-attendance').click(function() {
-                    $('#btn-save').val("create-attendance");
+                $('#create-new-meta').click(function() {
+                    $('#btn-save').val("create-meta");
                     $('#data_id').val("");
                     $('#dataForm').trigger("reset");
-                    $('#exampleModalScrollableTitle').html("Add Attendance");
+                    $('#exampleModalScrollableTitle').html("Add New User Meta");
                     $('#btn-save').html("Save");
                     $('#exampleModalScrollable').modal('show');
+                    $('#password').attr('required', true);
+                    $('#status').val(1);
                 });
 
                 /* When click edit user */
-                $('body').on('click', '#edit-attendance', function() {
+                $('body').on('click', '#edit-meta', function() {
                     var data_id = $(this).data('id');
-                    $.get('/admin-dashboard/attendance-edit/' + data_id, function(data) {
-                        $('#exampleModalScrollableTitle').html("Edit Attendance Information");
+                    $.get('/admin-dashboard/meta-edit/' + data_id, function(data) {
+                        $('#exampleModalScrollableTitle').html("Edit User Meta Information");
                         $('#btn-save').html("Update");
-                        $('#btn-save').val("edit-attendance");
+                        $('#btn-save').val("edit-meta");
                         $('#exampleModalScrollable').modal('show');
                         $('#data_id').val(data.id);
-                        $('#date').val(data.date);
-                        $('#username').val(data.username);
-                        $('#attendance').val(data.attendance);
+                        $('#join_date').val(data.join_date);
+                        $('#designation').val(data.designation);
+                        $('#salary').val(data.salary);
+                        $('#description').val(data.description);
+                        $('#status').val(data.status);
                     })
                 });
 
                 //delete user login
-                $('body').on('click', '#delete-attendance', function() {
+                $('body').on('click', '#delete-meta', function() {
                     var data_id = $(this).data("id");
+
                     Swal.fire({
                         title: 'Are you sure?',
                         text: "You won't be able to revert this!",
@@ -214,7 +228,7 @@
 
                             $.ajax({
                                 type: "DELETE",
-                                url: "{{ url('/admin-dashboard/attendance-delete') }}" + '/' +
+                                url: "{{ url('/admin-dashboard/meta-delete') }}" + '/' +
                                     data_id,
                                 success: function(data) {
                                     $("#table_id_" + data_id).remove();
@@ -260,10 +274,10 @@
                 var id = $('#table_id_').val();
                 if (id) {
                     var method = 'update';
-                    var url = "{{ route('admin.attendance.store') }}";
+                    var url = "{{ route('admin.meta.store') }}";
                 } else {
                     var method = 'add';
-                    var url = "{{ route('admin.attendance.store') }}";
+                    var url = "{{ route('admin.meta.store') }}";
                 }
                 $.ajaxSetup({
                     headers: {
@@ -288,27 +302,27 @@
                         var datavalue = '<tr id="table_id_' +
                             data.id + '"><td >' +
                             data.id + '</td><td>' +
-                            data.date + '</td><td>' + 
-                            data.username + '</td><td>' +
-                            data.in + '</td><td>' +
-                            data.out + '</td><td>' +
-                            `${data.attendance == 0 ? 'Absent' : 'Present' }` + '</td>';
+                            data.join_date + '</td><td>' + 
+                            data.designation + '</td><td>' +
+                            data.salary + '</td><td>' +
+                            `${data.status == 0 ? 'Inactive' : 'Active' }` + '</td>';
+
 
                         datavalue += '<td><div class="btn-group" role="group" aria-label="Basic example">';
 
-                        datavalue += ' <a href="javascript:void(0)" id="edit-attendance" data-id="' +
+                        datavalue += ' <a href="javascript:void(0)" id="edit-meta" data-id="' +
                             data.id +
                             '" class="btn btn-primary waves-effect waves-float waves-light">Edit</a>';
 
 
-                        datavalue += '<a href="javascript:void(0)" id="delete-attendance" data-id="' +
+                        datavalue += '<a href="javascript:void(0)" id="delete-meta" data-id="' +
                             data.id +
                             '" class="btn btn-danger waves-effect waves-float waves-light" >Delete</a>';
 
                         datavalue += '</div></td></tr>';
 
 
-                        if (actionType == "create-attendance") {
+                        if (actionType == "create-meta") {
                             $('#data_crud').prepend(datavalue);
                         } else {
                             $("#table_id_" + data.id).replaceWith(datavalue);
@@ -347,11 +361,11 @@
                 });
             });
 
-            $('#attendance_search').keyup(function() {
+            $('#meta_search').keyup(function() {
                 var query = $(this).val();
                 var _token = $('input[name="_token"]').val();
                 $.ajax({
-                    url: "{{ route('admin.attendance.search') }}",
+                    url: "{{ route('admin.meta.search') }}",
                     method: "POST",
                     data: {
                         query: query,

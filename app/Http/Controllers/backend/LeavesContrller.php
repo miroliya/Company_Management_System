@@ -20,7 +20,6 @@ class LeavesContrller extends Controller
     public function index()
     {
         try{
-            $this->checkpermission(1);
             $leave = Leaves::latest()->get();
             return view('backend.leave.index', compact('leave'));
         } catch (Exception $e) {

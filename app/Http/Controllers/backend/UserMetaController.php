@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AttendanceRequest;
-use App\Models\Attendance;
+use App\Models\UserMeta;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
-class AttendanceController extends Controller
+class UserMetaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,8 +19,8 @@ class AttendanceController extends Controller
     public function index()
     {
         try{
-            $attendance = Attendance::latest()->get();
-            return view('backend.attendance.index', compact('attendance'));
+            $meta = UserMeta::latest()->get();
+            return view('backend.user_meta.index', compact('meta'));
         } catch (Exception $e) {
             dd($e->getMessage());
         }
@@ -33,26 +32,25 @@ class AttendanceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AttendanceRequest $request)
+    public function store(Request $request)
     {
         try{
+            
             if ($request->data_id == null) {
-                $data = new Attendance();
+                $data = new UserMeta();
                 $data->user_id = Auth::user()->id;
-                $data->date = $request->date;
-                $data->username = $request->username;
-                $data->attendance = $request->attendance;
-                $data->in = $request->in;
-                $data->out = $request->out;
+                $data->join_date = $request->join_date;
+                $data->designation = $request->designation;
+                $data->salary = $request->salary;
+                $data->status = $request->status;
                 $save = $data->save();
             } else {
-                $data = Attendance::find($request->data_id);
+                $data = UserMeta::find($request->data_id);
                 $data->user_id = Auth::user()->id;
-                $data->date = $request->date;
-                $data->username = $request->username;
-                $data->attendance = $request->attendance;
-                $data->in = $request->in;
-                $data->out = $request->out;
+                $data->join_date = $request->join_date;
+                $data->designation = $request->designation;
+                $data->salary = $request->salary;
+                $data->status = $request->status;
                 $save = $data->update();
             }
             return Response::json($data);
@@ -71,7 +69,7 @@ class AttendanceController extends Controller
     {
         //
     }
-     /**
+       /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -80,7 +78,7 @@ class AttendanceController extends Controller
     public function edit($id)
     {
         try{
-            $singleData = Attendance::find($id);
+            $singleData = UserMeta::find($id);
             return Response::json($singleData);
         } catch (Exception $e) {
             dd($e->getMessage());
@@ -98,17 +96,17 @@ class AttendanceController extends Controller
     {
         //
     }
-    public function attendance_search(Request $request)
+    public function meta_search(Request $request)
     {
         try{
             $query = $request->get('query');
             if ($request->get('query') == null) {
-                $allData = Attendance::latest()->get();
+                $allData = UserMeta::latest()->get();
             } else {
-                $allData = Attendance::where('username', 'LIKE', "%{$query}%")
+                $allData = UserMeta::where('designation', 'LIKE', "%{$query}%")
                     ->latest()->get();
             }
-            return view('backend.attendance.search', compact('allData'));
+            return view('backend.user_meta.search', compact('allData'));
         } catch (Exception $e) {
             dd($e->getMessage());
         }
@@ -124,7 +122,7 @@ class AttendanceController extends Controller
     public function destroy($id)
     {
         try{
-            $findiT = Attendance::findOrFail($id);
+            $findiT = UserMeta::findOrFail($id);
             $data = $findiT->delete();
             return Response::json($data);
         } catch (Exception $e){

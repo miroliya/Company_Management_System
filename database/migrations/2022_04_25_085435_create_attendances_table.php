@@ -19,8 +19,8 @@ class CreateAttendancesTable extends Migration
             $table->date('date')->nullable();
             $table->string('username')->nullable();
             $table->boolean('attendance')->default(0);
-            $table->date('in')->nullable()->comment('Employee in time');
-            $table->date('out')->nullable()->comment('Employee out time');
+            $table->timestamp('in')->nullable()->comment('Employee in time');
+            $table->timestamp('out')->nullable()->comment('Employee out time');
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->on('users')->references('id')->onUpdate('NO ACTION')->onDelete('CASCADE');

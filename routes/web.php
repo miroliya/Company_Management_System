@@ -9,6 +9,7 @@ use App\Http\Controllers\backend\EventController;
 use App\Http\Controllers\backend\LeavesContrller;
 use App\Http\Controllers\backend\TaskController;
 use App\Http\Controllers\backend\ManageSalaryController;
+use App\Http\Controllers\backend\UserMetaController;
 use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
@@ -117,6 +118,16 @@ Route::group(['middleware' => 'auth:web'], function () {
      Route::post('/admin-dashboard/attendance-update/{id}', [AttendanceController::class, 'update'])->name('admin.attendance.update');
      Route::delete('/admin-dashboard/attendance-delete/{id}', [AttendanceController::class, 'destroy'])->name('admin.attendance.delete');
      Route::post('/admin-dashboard/attendance-search', [AttendanceController::class, 'attendance_search'])->name('admin.attendance.search');
+
+    //User-Meta Route
+    Route::get('/admin-dashboard/meta-list', [UserMetaController::class, 'index'])->name('admin.meta.list');
+    Route::get('/admin-dashboard/meta-create', [UserMetaController::class, 'create'])->name('admin.meta.create');
+    Route::post('/admin-dashboard/meta-store', [UserMetaController::class, 'store'])->name('admin.meta.store');
+    Route::get('/admin-dashboard/meta-edit/{id}', [UserMetaController::class, 'edit'])->name('admin.meta.edit');
+    Route::get('/admin-dashboard/meta-show/{id}', [UserMetaController::class, 'show'])->name('admin.meta.show');
+    Route::post('/admin-dashboard/meta-update/{id}', [UserMetaController::class, 'update'])->name('admin.meta.update');
+    Route::delete('/admin-dashboard/meta-delete/{id}', [UserMetaController::class, 'destroy'])->name('admin.meta.delete');
+    Route::post('/admin-dashboard/meta-search', [UserMetaController::class, 'meta_search'])->name('admin.meta.search');
     
 });
 //ADMIN PROTECTED ROUTE END

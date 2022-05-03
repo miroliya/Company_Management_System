@@ -20,7 +20,6 @@ class ManageSalaryController extends Controller
     public function index()
     {
         try{
-            $this->checkpermission(1);
             $salary = ManageSalaries::latest()->get();
             return view('backend.salary.index', compact('salary'));
         } catch (Exception $e) {

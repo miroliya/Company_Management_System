@@ -52,8 +52,10 @@
                                         </div>
                                     </div>
                                     <br>
+                                    @if (Auth::user()->user_permission != ',2')
                                     <a href="javascript:void(0)" id="create-new-task" class="btn btn-md bg-gradient-primary"
                                         style="float:right">Add Task</a>
+                                    @endif
                                 </div>
 
                             </div>
@@ -70,7 +72,9 @@
                                             <th>End-Date</th>
                                             <th>Description</th>
                                             <th>Status</th>
+                                            @if (Auth::user()->user_permission != ',2')
                                             <th>Action</th>
+                                            @endif
                                         </tr>
                                     </thead>
                                     <tbody id="data_crud">
@@ -83,6 +87,7 @@
                                                 <td>{{ $singleData->description }}</td>
                                                 <td>{{ $singleData->user_status == 0 ? "Inactive" : "Active"}}</td>
                                                 <td>
+                                                    @if (Auth::user()->user_permission != ',2')
                                                     <div class="btn-group">
                                                         <a href="javascript:void(0)" id="edit-task"
                                                             data-id="{{ $singleData->id }}" class="btn btn-primary">
@@ -93,6 +98,7 @@
                                                             Delete
                                                         </a>
                                                     </div>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\TaskRequest;
 use Illuminate\Http\Request;
 use App\Models\Task;
+use App\Models\UserMeta;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Response;
@@ -20,7 +21,6 @@ class TaskController extends Controller
     public function index()
     {
         try{
-            $this->checkpermission(1);
             $task = Task::latest()->get();
             return view('backend.task.index', compact('task'));
         } catch (Exception $e) {

@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Exception;
 use Response;
+use App\Models\Attendance;
+use Carbon\Carbon;
 
 class Usercontroller extends Controller
 {
@@ -230,11 +232,16 @@ class Usercontroller extends Controller
             ]);
             
             if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-                Auth::user()->save();
+                                   
+                    $user_id = Auth::user()->id;
 
-                if(Auth::user()->id == null){
+                    $attendance = Attendance::firstOrNew(['user_id' => $user_id]);
+                    $attendance->user_id = Auth::user()->id;
+                    $attendance->date = Carbon::now();
+                    $attendance->username = Auth::user()->name;
+                    $attendance->in = Carbon::now();
                     
-                }
+                    $attendance->save();
 
                 return redirect()->route('admin.dashboard')->with('success_message', 'You are success fully loged In');
             } else {
@@ -285,6 +292,16 @@ class Usercontroller extends Controller
     public function logout()
     {
         try{
+            $user_id = Auth::user()->id;
+
+            $attendance = Attendance::firstOrNew(['user_id' => $user_id]);
+            $attendance->user_id = Auth::user()->id;
+            $attendance->date = Carbon::now();
+            $attendance->username = Auth::user()->username;
+            $attendance->out = Carbon::now();
+            
+            $attendance->save();
+
             Auth::logout();
             Session::flash('success_message', 'Successfully Loged Out');
             return redirect()->route('admin.login');

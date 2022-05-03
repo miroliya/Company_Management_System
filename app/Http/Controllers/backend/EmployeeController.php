@@ -19,7 +19,6 @@ class EmployeeController extends Controller
     public function index()
     {
         try{
-            $this->checkpermission(1);
             $employee = User::where('first_name', '!=', null)->get();
             return view('backend.employee.index', compact('employee'));
         } catch (Exception $e) {
