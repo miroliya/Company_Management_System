@@ -174,9 +174,6 @@
                     }
                     reader.readAsDataURL(this.files[0]);
                 });
-
-
-
                 /*  When user click add user button */
                 $('#create-new-event').click(function() {
                     $('#btn-save').val("create-event");

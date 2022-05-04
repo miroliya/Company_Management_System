@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UserMetaRequest;
 use App\Models\UserMeta;
 use Illuminate\Http\Request;
 use Exception;
@@ -32,10 +33,9 @@ class UserMetaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserMetaRequest $request)
     {
         try{
-            
             if ($request->data_id == null) {
                 $data = new UserMeta();
                 $data->user_id = Auth::user()->id;

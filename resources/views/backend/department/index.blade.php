@@ -188,10 +188,7 @@
                         $('#department_status').val(data.status);
                     })
                 });
-
-
-
-
+                
                 //delete user login
                 $('body').on('click', '#delete-department', function() {
                     var data_id = $(this).data("id");
