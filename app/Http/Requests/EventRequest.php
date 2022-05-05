@@ -26,7 +26,6 @@ class EventRequest extends FormRequest
     public function rules()
     {
         $rules = Self::$rules;
-
         switch (Route::currentRouteName()) {
             case 'admin.event.store':
                 {

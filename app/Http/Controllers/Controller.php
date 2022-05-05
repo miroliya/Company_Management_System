@@ -18,12 +18,12 @@ class Controller extends BaseController
 	{
 		try {
 			$user = Auth::user();
-			// $userpermission = explode(',', $user->user_permission);
-			// if (in_array($permission, $userpermission)) {
-			// 	//dd('hi');
-			// } else {
-			// 	return Redirect::to('/admin-dashboard')->send()->with('error_message', 'You Have No Permission For Access This Module');
-			// }
+			$userpermission = explode(',', $user->user_permission);
+			if (in_array($permission, $userpermission)) {
+				//dd('hi');
+			} else {
+				return Redirect::to('/admin-dashboard')->send()->with('error_message', 'You Have No Permission For Access This Module');
+			}
 		} catch (Exception $e) {
 			dd($e->getMessage());
 		}

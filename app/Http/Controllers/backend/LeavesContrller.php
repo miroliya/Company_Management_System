@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Http\Requests\LeavesRequest;
 use App\Models\Leaves;
-use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Response;
@@ -25,6 +25,16 @@ class LeavesContrller extends Controller
         } catch (Exception $e) {
             dd($e->getMessage());
         }
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -73,7 +83,8 @@ class LeavesContrller extends Controller
     {
         //
     }
-     /**
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -87,18 +98,6 @@ class LeavesContrller extends Controller
         } catch (Exception $e) {
             dd($e->getMessage());
         }
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
     }
     public function leave_search(Request $request)
     {
@@ -118,6 +117,18 @@ class LeavesContrller extends Controller
     }
 
     /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -125,6 +136,12 @@ class LeavesContrller extends Controller
      */
     public function destroy($id)
     {
-        //
+        try{
+            $findiT = Leaves::findOrFail($id);
+            $data = $findiT->delete();
+            return Response::json($data);
+        } catch (Exception $e){
+            dd($e->getMessage());
+        }
     }
 }

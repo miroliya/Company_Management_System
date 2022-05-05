@@ -217,7 +217,7 @@
                 /* When click edit user */
                 $('body').on('click', '#edit-leave', function() {
                     var data_id = $(this).data('id');
-                    $.get('/admin-dashboard/leave-edit/' + data_id, function(data) {
+                    $.get('/admin-dashboard/leaves/' + data_id, function(data) {
                         $('#exampleModalScrollableTitle').html("Edit Leave Information");
                         $('#btn-save').html("Update");
                         $('#btn-save').val("edit-leave");

@@ -99,6 +99,8 @@ Route::group(['middleware' => 'auth:web'], function () {
     Route::delete('/admin-dashboard/leave-delete/{id}', [LeavesContrller::class, 'destroy'])->name('admin.leave.delete');
     Route::post('/admin-dashboard/leave-search', [LeavesContrller::class, 'leave_search'])->name('admin.leave.search');
 
+    Route::resource('leaves', LeavesContrller::class);
+
     //Salary Route
     Route::get('/admin-dashboard/salary-list', [ManageSalaryController::class, 'index'])->name('admin.salary.list');
     Route::get('/admin-dashboard/salary-create', [ManageSalaryController::class, 'create'])->name('admin.salary.create');

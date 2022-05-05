@@ -225,7 +225,6 @@
                         buttonsStyling: false
                     }).then(function(result) {
                         if (result.value) {
-
                             $.ajax({
                                 type: "DELETE",
                                 url: "{{ url('/admin-dashboard/meta-delete') }}" + '/' +
