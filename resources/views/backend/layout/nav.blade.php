@@ -12,57 +12,57 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('admin.user.list') }}"
-                    class="nav-link {{ Request::is('admin-dashboard/admin-list') ? 'active' : '' }} ">
+                <a href="{{ route('users.index') }}"
+                    class="nav-link {{ Request::is('users') ? 'active' : '' }} ">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Admin</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('admin.employee.list') }}"
-                    class="nav-link {{ Request::is('admin-dashboard/employee-list') ? 'active' : '' }}  ">
+                <a href="{{ route('employee.index') }}"
+                    class="nav-link {{ Request::is('employee') ? 'active' : '' }}  ">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Employee</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('admin.task.list') }}"
-                    class="nav-link {{ Request::is('admin-dashboard/task-list') ? 'active' : '' }}  ">
+                <a href="{{ route('task.index') }}"
+                    class="nav-link {{ Request::is('task') ? 'active' : '' }}  ">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Task</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('admin.event.list') }}"
-                    class="nav-link {{ Request::is('admin-dashboard/event-list') ? 'active' : '' }}  ">
+                <a href="{{ route('event.index') }}"
+                    class="nav-link {{ Request::is('event') ? 'active' : '' }}  ">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Events</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('admin.department.list') }}"
-                    class="nav-link {{ Request::is('admin-dashboard/department-list') ? 'active' : '' }}  ">
+                <a href="{{ route('department.index') }}"
+                    class="nav-link {{ Request::is('department') ? 'active' : '' }}  ">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Departments</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('leaves.index') }}"
-                    class="nav-link {{ Request::is('admin-dashboard/leave-list') ? 'active' : '' }}  ">
+                <a href="{{ route('leave.index') }}"
+                    class="nav-link {{ Request::is('leave') ? 'active' : '' }}  ">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Leaves</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('admin.salary.list') }}"
-                    class="nav-link {{ Request::is('admin-dashboard/salary-list') ? 'active' : '' }}  ">
+                <a href="{{ route('salary.index') }}"
+                    class="nav-link {{ Request::is('salary') ? 'active' : '' }}  ">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Salary</p>
                 </a>
             </li>
             <li class="nav-item ">
-                <a href="{{ route('admin.attendance.list') }}"
-                    class="nav-link {{ Request::is('admin-dashboard/attendance-list') ? 'active' : '' }}  ">
+                <a href="{{ route('attendance.index') }}"
+                    class="nav-link {{ Request::is('attendance') ? 'active' : '' }}  ">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Attendance</p>
                 </a>
@@ -76,22 +76,22 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('admin.event.list') }}"
-                    class="nav-link {{ Request::is('admin-dashboard/event-list') ? 'active' : '' }}  ">
+                <a href="{{ route('event.list') }}"
+                    class="nav-link {{ Request::is('event') ? 'active' : '' }}  ">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Events</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('admin.salary.list') }}"
-                    class="nav-link {{ Request::is('admin-dashboard/salary-list') ? 'active' : '' }}  ">
+                <a href="{{ route('salary.index') }}"
+                    class="nav-link {{ Request::is('salary') ? 'active' : '' }}  ">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Salary</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ route('admin.attendance.list') }}"
-                    class="nav-link {{ Request::is('admin-dashboard/attendance-list') ? 'active' : '' }}  ">
+                <a href="{{ route('attendance.index') }}"
+                    class="nav-link {{ Request::is('attendance') ? 'active' : '' }}  ">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Attendance</p>
                 </a>
@@ -100,14 +100,14 @@
         @if (Auth::user()->user_permission == ',3')
             <li class="nav-item">
                 <a href="{{ route('admin.department.list') }}"
-                    class="nav-link {{ Request::is('admin-dashboard/department-list') ? 'active' : '' }}  ">
+                    class="nav-link {{ Request::is('department') ? 'active' : '' }}  ">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Departments</p>
                 </a>
             </li>
             <li class="nav-item">
                 <a href="{{ route('admin.leave.list') }}"
-                    class="nav-link {{ Request::is('admin-dashboard/leave-list') ? 'active' : '' }}  ">
+                    class="nav-link {{ Request::is('leave') ? 'active' : '' }}  ">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Leaves</p>
                 </a>
@@ -115,16 +115,16 @@
         @endif
         @if (Auth::user()->user_permission == ',2')
             <li class="nav-item">
-                <a href="{{ route('admin.task.list') }}"
-                    class="nav-link {{ Request::is('admin-dashboard/task-list') ? 'active' : '' }}  ">
+                <a href="{{ route('task.index') }}"
+                    class="nav-link {{ Request::is('task') ? 'active' : '' }}  ">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Task</p>
                 </a>
             </li>
         @endif
         <li class="nav-item">
-            <a href="{{ route('admin.meta.list') }}"
-                class="nav-link {{ Request::is('admin-dashboard/meta-list') ? 'active' : '' }}  ">
+            <a href="{{ route('meta.index') }}"
+                class="nav-link {{ Request::is('meta') ? 'active' : '' }}  ">
                 <i class="far fa-circle nav-icon"></i>
                 <p>User Meta</p>
             </a>

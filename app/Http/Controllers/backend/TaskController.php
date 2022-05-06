@@ -37,7 +37,6 @@ class TaskController extends Controller
     public function store(TaskRequest $request)
     {
         try{
-            
             if ($request->data_id == null) {
                 $data = new Task();
                 $data->user_id = Auth::user()->id;

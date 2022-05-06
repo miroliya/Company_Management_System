@@ -189,7 +189,7 @@
                 /* When click edit user */
                 $('body').on('click', '#edit-event', function() {
                     var data_id = $(this).data('id');
-                    $.get('/admin-dashboard/event-edit/' + data_id, function(data) {
+                    $.get(`/event/${data_id}/edit/`,function(data) {
                         $('#exampleModalScrollableTitle').html("Edit Event Information");
                         $('#btn-save').html("Update");
                         $('#btn-save').val("edit-event");
@@ -225,7 +225,7 @@
 
                             $.ajax({
                                 type: "DELETE",
-                                url: "{{ url('/admin-dashboard/event-delete') }}" + '/' +
+                                url: "{{ url('/event') }}" + '/' +
                                     data_id,
                                 success: function(data) {
                                     $("#table_id_" + data_id).remove();
@@ -271,10 +271,10 @@
                 var id = $('#table_id_').val();
                 if (id) {
                     var method = 'update';
-                    var url = "{{ route('admin.event.store') }}";
+                    var url = "{{ route('event.store') }}";
                 } else {
                     var method = 'add';
-                    var url = "{{ route('admin.event.store') }}";
+                    var url = "{{ route('event.store') }}";
                 }
                 $.ajaxSetup({
                     headers: {

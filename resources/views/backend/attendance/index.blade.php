@@ -183,7 +183,7 @@
                 /* When click edit user */
                 $('body').on('click', '#edit-attendance', function() {
                     var data_id = $(this).data('id');
-                    $.get('/admin-dashboard/attendance-edit/' + data_id, function(data) {
+                    $.get(`/attendance/${data_id}/edit/`, function(data) {
                         $('#exampleModalScrollableTitle').html("Edit Attendance Information");
                         $('#btn-save').html("Update");
                         $('#btn-save').val("edit-attendance");
@@ -214,7 +214,7 @@
 
                             $.ajax({
                                 type: "DELETE",
-                                url: "{{ url('/admin-dashboard/attendance-delete') }}" + '/' +
+                                url: "{{ url('/attendance') }}" + '/' +
                                     data_id,
                                 success: function(data) {
                                     $("#table_id_" + data_id).remove();
@@ -260,10 +260,10 @@
                 var id = $('#table_id_').val();
                 if (id) {
                     var method = 'update';
-                    var url = "{{ route('admin.attendance.store') }}";
+                    var url = "{{ route('attendance.store') }}";
                 } else {
                     var method = 'add';
-                    var url = "{{ route('admin.attendance.store') }}";
+                    var url = "{{ route('attendance.store') }}";
                 }
                 $.ajaxSetup({
                     headers: {

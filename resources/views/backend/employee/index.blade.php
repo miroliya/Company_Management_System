@@ -251,7 +251,7 @@
                 /* When click edit user */
                 $('body').on('click', '#edit-user', function() {
                     var data_id = $(this).data('id');
-                    $.get('/admin-dashboard/employee-edit/' + data_id, function(data) {
+                    $.get(`/employee/${data_id}/edit/`, function(data) {
                         $('#exampleModalScrollableTitle').html("Edit Employee Information");
                         $('#btn-save').html("Update");
                         $('#btn-save').val("edit-user");
@@ -294,7 +294,7 @@
 
                             $.ajax({
                                 type: "DELETE",
-                                url: "{{ url('/admin-dashboard/employee-delete') }}" + '/' +
+                                url: "{{ url('/employee') }}" + '/' +
                                     data_id,
                                 success: function(data) {
                                     $("#table_id_" + data_id).remove();
@@ -340,10 +340,10 @@
                 var id = $('#table_id_').val();
                 if (id) {
                     var method = 'update';
-                    var url = "{{ route('admin.employee.store') }}";
+                    var url = "{{ route('employee.store') }}";
                 } else {
                     var method = 'add';
-                    var url = "{{ route('admin.employee.store') }}";
+                    var url = "{{ route('employee.store') }}";
                 }
                 $.ajaxSetup({
                     headers: {

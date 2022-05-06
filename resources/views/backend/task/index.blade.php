@@ -205,7 +205,7 @@
                 /* When click edit user */
                 $('body').on('click', '#edit-task', function() {
                     var data_id = $(this).data('id');
-                    $.get('/admin-dashboard/task-edit/' + data_id, function(data) {
+                    $.get(`/task/${data_id}/edit/`, function(data) {
                         $('#exampleModalScrollableTitle').html("Edit Task Information");
                         $('#btn-save').html("Update");
                         $('#btn-save').val("edit-task");
@@ -242,7 +242,7 @@
 
                             $.ajax({
                                 type: "DELETE",
-                                url: "{{ url('/admin-dashboard/task-delete') }}" + '/' +
+                                url: "{{ url('/task') }}" + '/' +
                                     data_id,
                                 success: function(data) {
                                     $("#table_id_" + data_id).remove();
@@ -288,10 +288,10 @@
                 var id = $('#table_id_').val();
                 if (id) {
                     var method = 'update';
-                    var url = "{{ route('admin.task.store') }}";
+                    var url = "{{ route('task.store') }}";
                 } else {
                     var method = 'add';
-                    var url = "{{ route('admin.task.store') }}";
+                    var url = "{{ route('task.store') }}";
                 }
                 $.ajaxSetup({
                     headers: {

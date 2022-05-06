@@ -194,7 +194,7 @@
                 /* When click edit user */
                 $('body').on('click', '#edit-meta', function() {
                     var data_id = $(this).data('id');
-                    $.get('/admin-dashboard/meta-edit/' + data_id, function(data) {
+                    $.get(`/meta/${data_id}/edit/`,  function(data) {
                         $('#exampleModalScrollableTitle').html("Edit User Meta Information");
                         $('#btn-save').html("Update");
                         $('#btn-save').val("edit-meta");
@@ -227,7 +227,7 @@
                         if (result.value) {
                             $.ajax({
                                 type: "DELETE",
-                                url: "{{ url('/admin-dashboard/meta-delete') }}" + '/' +
+                                url: "{{ url('/meta') }}" + '/' +
                                     data_id,
                                 success: function(data) {
                                     $("#table_id_" + data_id).remove();
@@ -273,10 +273,10 @@
                 var id = $('#table_id_').val();
                 if (id) {
                     var method = 'update';
-                    var url = "{{ route('admin.meta.store') }}";
+                    var url = "{{ route('meta.store') }}";
                 } else {
                     var method = 'add';
-                    var url = "{{ route('admin.meta.store') }}";
+                    var url = "{{ route('meta.store') }}";
                 }
                 $.ajaxSetup({
                     headers: {

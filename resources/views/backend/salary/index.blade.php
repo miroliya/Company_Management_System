@@ -179,7 +179,7 @@
                 /* When click edit user */
                 $('body').on('click', '#edit-salary', function() {
                     var data_id = $(this).data('id');
-                    $.get('/admin-dashboard/salary-edit/' + data_id, function(data) {
+                    $.get(`/salary/${data_id}/edit/`,function(data) {
                         $('#exampleModalScrollableTitle').html("Edit Salary Information");
                         $('#btn-save').html("Update");
                         $('#btn-save').val("edit-salary");
@@ -210,7 +210,7 @@
 
                             $.ajax({
                                 type: "DELETE",
-                                url: "{{ url('/admin-dashboard/salary-delete') }}" + '/' +
+                                url: "{{ url('/salary') }}" + '/' +
                                     data_id,
                                 success: function(data) {
                                     $("#table_id_" + data_id).remove();
@@ -256,10 +256,10 @@
                 var id = $('#table_id_').val();
                 if (id) {
                     var method = 'update';
-                    var url = "{{ route('admin.salary.store') }}";
+                    var url = "{{ route('salary.store') }}";
                 } else {
                     var method = 'add';
-                    var url = "{{ route('admin.salary.store') }}";
+                    var url = "{{ route('salary.store') }}";
                 }
                 $.ajaxSetup({
                     headers: {

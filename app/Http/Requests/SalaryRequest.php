@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 
 class SalaryRequest extends FormRequest
 {
+    public static $rules = [];
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,6 +25,7 @@ class SalaryRequest extends FormRequest
      */
     public function rules()
     {
+        $rules = Self::$rules;
         switch (Route::currentRouteName()) {
             case 'admin.salary.store':
                 {

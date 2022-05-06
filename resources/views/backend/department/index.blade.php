@@ -178,7 +178,7 @@
                 /* When click edit user */
                 $('body').on('click', '#edit-department', function() {
                     var data_id = $(this).data('id');
-                    $.get('/admin-dashboard/department-edit/' + data_id, function(data) {
+                    $.get(`/department/${data_id}/edit/`,function(data) {
                         $('#exampleModalScrollableTitle').html("Edit Department Information");
                         $('#btn-save').html("Update");
                         $('#btn-save').val("edit-department");
@@ -209,7 +209,7 @@
 
                             $.ajax({
                                 type: "DELETE",
-                                url: "{{ url('/admin-dashboard/department-delete') }}" + '/' +
+                                url: "{{ url('department') }}" + '/' +
                                     data_id,
                                 success: function(data) {
                                     $("#table_id_" + data_id).remove();
@@ -255,10 +255,10 @@
                 var id = $('#table_id_').val();
                 if (id) {
                     var method = 'update';
-                    var url = "{{ route('admin.department.store') }}";
+                    var url = "{{ route('department.store') }}";
                 } else {
                     var method = 'add';
-                    var url = "{{ route('admin.department.store') }}";
+                    var url = "{{ route('department.store') }}";
                 }
                 $.ajaxSetup({
                     headers: {

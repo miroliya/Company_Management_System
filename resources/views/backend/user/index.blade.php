@@ -181,8 +181,6 @@
 
                 });
 
-
-
                 /*  When user click add user button */
                 $('#create-new-user').click(function() {
                     $('#btn-save').val("create-user");
@@ -202,7 +200,7 @@
                 /* When click edit user */
                 $('body').on('click', '#edit-user', function() {
                     var data_id = $(this).data('id');
-                    $.get('/admin-dashboard/user-edit/' + data_id, function(data) {
+                    $.get(`/users/${data_id}/edit/`,  data_id, function(data) {
                         $('#exampleModalScrollableTitle').html("Edit Admin User");
                         $('#btn-save').html("Update");
                         $('#btn-save').val("edit-user");
@@ -273,7 +271,7 @@
 
                                 $.ajax({
                                     type: "DELETE",
-                                    url: "{{ url('/admin-dashboard/user-delete') }}" + '/' +
+                                    url: "{{ url('users') }}" + '/' +
                                         data_id,
                                     success: function(data) {
                                         $("#table_id_" + data_id).remove();
@@ -328,10 +326,10 @@
                 var id = $('#table_id_').val();
                 if (id) {
                     var method = 'update';
-                    var url = "{{ route('admin.user.store') }}";
+                    var url = "{{ route('users.store') }}";
                 } else {
                     var method = 'add';
-                    var url = "{{ route('admin.user.store') }}";
+                    var url = "{{ route('users.store') }}";
                 }
 
                 $.ajaxSetup({
