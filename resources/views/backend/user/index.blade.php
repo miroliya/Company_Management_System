@@ -231,11 +231,6 @@
                     })
                 });
 
-
-
-
-
-
                 //delete user login
                 $('body').on('click', '#delete-user', function() {
                     var data_id = $(this).data("id");
