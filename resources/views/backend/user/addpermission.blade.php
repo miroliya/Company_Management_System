@@ -8,8 +8,6 @@
     <link rel="stylesheet" href="{{ asset('resources') }}/plugins/toastr/toastr.min.css">
 @endsection
 
-
-
 @section('content')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -317,8 +315,6 @@
                                                 @endif
                                             </td>
                                         </tr>
-
-
                                     </tbody>
                                 </table>
                             </div>

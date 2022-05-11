@@ -67,6 +67,13 @@
                     <p>Attendance</p>
                 </a>
             </li>
+            <li class="nav-item">
+                <a href="{{ route('reports.index') }}"
+                    class="nav-link {{ Request::is('reports.index') ? 'active' : '' }}  ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Reports</p>
+                </a>
+            </li>
           @elseif(Auth::user()->user_permission == ',4')
             <li class="nav-item">
                 <a href="{{ route('admin.employee.list') }}"

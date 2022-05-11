@@ -12,6 +12,8 @@ use App\Http\Controllers\backend\TaskController;
 use App\Http\Controllers\backend\ManageSalaryController;
 use App\Http\Controllers\backend\UserMetaController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\backend\ReportController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -78,4 +80,6 @@ Route::group(['middleware' => 'auth:web'], function () {
   Route::resource('meta', UserMetaController::class);
   Route::post('/admin-dashboard/meta-search', [UserMetaController::class, 'meta_search'])->name('admin.meta.search');
 
+  //Report Route
+  Route::get('reports', [ReportController::class, 'index'])->name('reports.index');
 });

@@ -324,13 +324,13 @@
                         console.log(data.image);
                         let spare = data.image;
                         var datavalue = '<tr id="table_id_' +
-                            data.id + '"><td >' +
+                            data.id + '"><td>' +
                             data.id + '</td><td>' +
                             data.leave_type + '</td><td>' + 
                             data.date_from + '</td><td>' +
                             data.date_to + '</td><td>' +
                             data.reason + '</td><td>' +
-                            `${data.is_approved == 0 ? 'Rejected' : 'Approved' }` + '</td>';
+                            `${data.is_approved == 0 ? 'Rejected' : 'Approved' }` + '</td><td>' +
                             `${data.status == 0 ? 'Inactive' : 'Active' }` + '</td>';
 
 
